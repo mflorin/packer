@@ -3,8 +3,6 @@ name: Check Markdown links for modified files
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
-    outputs:
-      preview_url: ${{ steps.waitForVercelPreviewDeployment.outputs.url }}
     steps:
     - name: Wait for Vercel preview deployment to be ready
       uses: patrickedqvist/wait-for-vercel-preview@master
@@ -14,7 +12,7 @@ jobs:
        max_timeout: 300
     - name: Set target URL env
       run:
-        echo "DEPLOYMENT_URL=${{ needs.test_setup.outputs.preview_url }}" >> $GITHUB_ENV
+        echo "DEPLOYMENT_URL=${{ needs.waitForVercelPreviewDeployment.outputs.url }}" >> $GITHUB_ENV
     - uses: actions/checkout@master
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
       with:
