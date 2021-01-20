@@ -1,4 +1,4 @@
-on: [pull_request]
+on: [deployment_status]
 name: Check Markdown links for modified files
 jobs:
   markdown-link-check:
