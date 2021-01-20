@@ -5,12 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: SFDigitalServices/wait-for-deployment-action@v1
+      id: deployment
       with:
         token: ${{ github.token }}
         environment: Preview
         timeout: 60
-    - env:
-      DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
+      run:
+        echo "DEPLOYMENT_URL=${{ github.event.deployment_status.target_url }}" >> $GITHUB_ENV
     - uses: actions/checkout@master
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
       with:
