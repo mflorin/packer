@@ -1,4 +1,4 @@
-on: [deployment_status]
+on: [pull_request]
 name: Check Markdown links for modified files
 jobs:
   markdown-link-check:
@@ -11,6 +11,7 @@ jobs:
       id: waitForVercelPreviewDeployment
       with:
        token: ${{ secrets.GITHUB_TOKEN }}
+       max_timeout: 60
     - name: Set target URL env
       run:
         echo "DEPLOYMENT_URL=${{ needs.test_setup.outputs.preview_url }}" >> $GITHUB_ENV
