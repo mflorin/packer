@@ -1,15 +1,11 @@
-on: [pull_request]
+on:
+  deployment_status: [success]
 name: Check Markdown links for modified files
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: SFDigitalServices/wait-for-deployment-action@v1
-      id: deployment
-      with:
-        token: ${{ github.token }}
-        environment: Preview
-        timeout: 60
+    - name: Set target URL env
       run:
         echo "DEPLOYMENT_URL=${{ github.event.deployment_status.target_url }}" >> $GITHUB_ENV
     - uses: actions/checkout@master
