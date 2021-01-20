@@ -22,9 +22,6 @@
       "pattern": "^/docs/templates/hcl_templates/"
     },
     {
-      "pattern": "^/docs/datasources"
-    },
-    {
       "pattern": "^/docs/extending/custom-datasources"
     },
     {
