@@ -2,7 +2,10 @@ on: [pull_request]
 name: Check Markdown links for modified files
 jobs:
   markdown-link-check:
+    if: github.event.deployment_status == 'success'
     runs-on: ubuntu-latest
+    env:
+      DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
     steps:
     - uses: actions/checkout@master
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
