@@ -10,12 +10,13 @@ jobs:
       with:
        token: ${{ secrets.GITHUB_TOKEN }}
        max_timeout: 300
-    - name: Set target URL env
+    - name: Set Deployment URL Env
       run:
-        echo "DEPLOYMENT_URL=${{ needs.waitForVercelPreviewDeployment.outputs.url }}" >> $GITHUB_ENV
+        echo "DEPLOYMENT_URL=${{ steps.waitForVercelPreviewDeployment.outputs.url }}" >> $GITHUB_ENV
     - uses: actions/checkout@master
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
       with:
         use-quiet-mode: 'yes'
         file-extension: 'mdx'
+        check-modified-files-only: 'yes'
         folder-path: 'website/content'
